@@ -1,5 +1,7 @@
 package com.market.onairmarket.Service;
 
+import com.market.onairmarket.dto.PageRequestDTO;
+import com.market.onairmarket.dto.PageResponseDTO;
 import com.market.onairmarket.dto.ProductDTO;
 import com.market.onairmarket.entity.Product;
 import com.market.onairmarket.repository.ProductRepository;
@@ -24,14 +26,16 @@ class ProductServiceTest {
 
     @Test
     public void registerProduct() {
-        ProductDTO productDTO = ProductDTO.builder()
-                .price(3000)
-                .pname("테스트 상품3")
-                .category("가전제품3")
-                .content("상품 3")
-                .build();
+        for(int i = 0; i < 10; i++) {
+            ProductDTO productDTO = ProductDTO.builder()
+                    .price(3000)
+                    .pname("상품" + i)
+                    .category("의류" + i)
+                    .content("내용" + i)
+                    .build();
 
-        productService.registerProduct(productDTO);
+            productService.registerProduct(productDTO);
+        }
     }
 
     @Test
@@ -69,8 +73,10 @@ class ProductServiceTest {
 
     @Test
     public void getAllProducts() {
-        List<Product> product = productService.getAllProducts();
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().build();
 
-        log.info("모든 상품 : " + product);
+        PageResponseDTO<ProductDTO> responseDTO = productService.getPageList(pageRequestDTO);
+
+        log.info("responseDTO : " + responseDTO.getCurrent() + responseDTO.getDtoList());
     }
 }

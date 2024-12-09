@@ -1,6 +1,8 @@
 package com.market.onairmarket.Controller;
 
 import com.market.onairmarket.Service.ProductService;
+import com.market.onairmarket.dto.PageRequestDTO;
+import com.market.onairmarket.dto.PageResponseDTO;
 import com.market.onairmarket.dto.ProductDTO;
 import com.market.onairmarket.entity.Product;
 import lombok.RequiredArgsConstructor;
@@ -40,8 +42,8 @@ public class ProductController {
 
     // 모든 상품,판매 중인 상품
     @GetMapping("/list")
-    public List<Product> allProduct() {
-        return productService.getAllProducts();
+    public PageResponseDTO<ProductDTO> allProducts(PageRequestDTO pageRequestDTO) {
+        return productService.getPageList(pageRequestDTO);
     }
 
     // 상품 날짜순

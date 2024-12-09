@@ -1,9 +1,15 @@
 package com.market.onairmarket.Service;
 
+import com.market.onairmarket.dto.PageRequestDTO;
+import com.market.onairmarket.dto.PageResponseDTO;
 import com.market.onairmarket.dto.ProductDTO;
 import com.market.onairmarket.entity.Product;
 import com.market.onairmarket.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,5 +63,34 @@ public class ProductService {
         product.changeDelFlag(true);
 
         productRepository.save(product);
+    }
+
+    // 상품 전체 목록 페이징
+    public PageResponseDTO<ProductDTO> getPageList(PageRequestDTO pageRequestDTO) {
+        Pageable pageable = PageRequest.of(
+                pageRequestDTO.getPage() - 1,
+                pageRequestDTO.getSize(),
+                Sort.by("id").descending()
+        );
+
+        Page<Product> result = productRepository.findPageBy(pageable);
+
+        List<ProductDTO> dtoList = result.getContent().stream().map(arr -> ProductDTO.builder()
+                .pno(arr.getId())
+                .pname(arr.getPname())
+                .content(arr.getContent())
+                .price(arr.getPrice())
+                .category(arr.getCategory())
+                .imagePath(arr.getImagePath())
+                .build()
+        ).toList();
+
+        long totalCount = result.getTotalElements();
+
+        return PageResponseDTO.<ProductDTO>withAll()
+                .dtoList(dtoList)
+                .total(totalCount)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
     }
 }
