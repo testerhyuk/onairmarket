@@ -93,4 +93,26 @@ public class ProductService {
                 .pageRequestDTO(pageRequestDTO)
                 .build();
     }
+
+    // 최신 상품 목록
+    public List<Product> getNewest6Product() {
+        Pageable pageable = PageRequest.of(0, 6, Sort.by("createdDate").descending());
+
+        return productRepository.findAllByOrderByCreatedDateDesc(pageable).getContent();
+    }
+
+    // 카테고리별 검색
+    public List<Product> searchByCategoryAndContent(String category, String keyword) {
+        return productRepository.findByCategoryAndContentContainingIgnoreCase(category, keyword);
+    }
+
+    // 전체 검색
+    public List<Product> searchByContent(String keyword) {
+        return productRepository.findByContentContainingIgnoreCase(keyword);
+    }
+
+    // 카테고리별 목록
+    public List<Product> getProductsByCategory(String category) {
+        return productRepository.findByCategory(category);
+    }
 }

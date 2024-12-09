@@ -47,6 +47,28 @@ public class ProductController {
     }
 
     // 상품 날짜순
-    // 카테고리 별 상품
+    @GetMapping("/latest")
+    public List<Product> getNewestProduct() {
+        return productService.getNewest6Product();
+    }
+
+    // 카테고리 별 상품 검색
+    @GetMapping("/search/category")
+    public List<Product> searchByCategoryAndContent(@RequestParam String category, @RequestParam String keyword) {
+        return productService.searchByCategoryAndContent(category, keyword);
+    }
+
+    // 상품 전체 검색
+    @GetMapping("/search")
+    public List<Product> searchBytContent(@RequestParam String keyword) {
+        return productService.searchByContent(keyword);
+    }
+
+    // 카테고리별 상품
+    @GetMapping("/category")
+    public List<Product> getProductsByCategory(@RequestParam String category) {
+        return productService.getProductsByCategory(category);
+    }
+
     // 상세페이지
 }

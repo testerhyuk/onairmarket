@@ -29,8 +29,8 @@ class ProductServiceTest {
         for(int i = 0; i < 10; i++) {
             ProductDTO productDTO = ProductDTO.builder()
                     .price(3000)
-                    .pname("상품" + i)
-                    .category("의류" + i)
+                    .pname("의류상품" + i)
+                    .category("의류")
                     .content("내용" + i)
                     .build();
 
@@ -78,5 +78,33 @@ class ProductServiceTest {
         PageResponseDTO<ProductDTO> responseDTO = productService.getPageList(pageRequestDTO);
 
         log.info("responseDTO : " + responseDTO.getCurrent() + responseDTO.getDtoList());
+    }
+
+    @Test
+    public void getNewestProduct() {
+        List<Product> products = productService.getNewest6Product();
+
+        log.info(products);
+    }
+
+    @Test
+    public void searchByCategoryAndContent() {
+        List<Product> products = productService.searchByCategoryAndContent("의류", "용");
+
+        log.info(products);
+    }
+
+    @Test
+    public void searchByContent() {
+        List<Product> products = productService.searchByContent("1");
+
+        log.info(products);
+    }
+
+    @Test
+    public void getProductsByCategory() {
+        List<Product> products = productService.getProductsByCategory("가전제품");
+
+        log.info(products);
     }
 }
