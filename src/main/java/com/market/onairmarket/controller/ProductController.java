@@ -1,4 +1,4 @@
-package com.market.onairmarket.Controller;
+package com.market.onairmarket.controller;
 
 import com.market.onairmarket.Service.ProductService;
 import com.market.onairmarket.dto.PageRequestDTO;
@@ -49,7 +49,7 @@ public class ProductController {
     // 상품 날짜순
     @GetMapping("/latest")
     public List<Product> getNewestProduct() {
-        return productService.getNewest6Product();
+        return productService.getNewest12Product();
     }
 
     // 카테고리 별 상품 검색

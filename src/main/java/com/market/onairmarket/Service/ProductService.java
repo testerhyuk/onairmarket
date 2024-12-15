@@ -95,8 +95,8 @@ public class ProductService {
     }
 
     // 최신 상품 목록
-    public List<Product> getNewest6Product() {
-        Pageable pageable = PageRequest.of(0, 6, Sort.by("createdDate").descending());
+    public List<Product> getNewest12Product() {
+        Pageable pageable = PageRequest.of(0, 12, Sort.by("createdDate").descending());
 
         return productRepository.findAllByOrderByCreatedDateDesc(pageable).getContent();
     }

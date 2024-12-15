@@ -1,0 +1,59 @@
+.main_layout {
+    
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    justify-content: space-between;
+}
+
+.navbar2 {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.fabars, .fabell, .fauser, .fasearch {
+    color: #6667AB;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.logo {
+    padding-left: 8%;
+    display: block;
+}
+
+.dropdown_toggle {
+    background-color: white;
+    border: white;
+}
+
+.dropdown_member_toggle {
+    background-color: white;
+    border: white;
+    padding: 0;
+}
+
+.dropdown_toggle:hover, .dropdown_member_toggle:hover {
+    background-color: white !important;
+}
+
+.dropdown_toggle:focus, .dropdown_member_toggle:focus {
+    background-color: white !important;
+}
+
+.dropdown_toggle:active, .dropdown_member_toggle:active {
+    background-color: white !important;
+}
+
+.all_products {
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown_menu {
+    line-height: 300%;
+}
